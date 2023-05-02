@@ -1,7 +1,7 @@
+import PropTypes from 'prop-types';
 import TransactionHistoryModule from '../components/TransactionHistory.module.css';
 
-export const TransactionHistory = data => {
-  const { items } = data;
+export const TransactionHistory = ({ items }) => {
 
   return (
     <>
@@ -15,12 +15,12 @@ export const TransactionHistory = data => {
         </thead>
 
         <tbody>
-          {items.map(item => (
-            <tr className={TransactionHistoryModule.line} key={item.id}>
-              <td className={TransactionHistoryModule.value}>{item.type}</td>
-              <td className={TransactionHistoryModule.value}>{item.amount}</td>
+          {items.map(({ id, type, amount, currency }) => (
+            <tr className={TransactionHistoryModule.line} key={id}>
+              <td className={TransactionHistoryModule.value}>{type}</td>
+              <td className={TransactionHistoryModule.value}>{amount}</td>
               <td className={TransactionHistoryModule.value}>
-                {item.currency}
+                {currency}
               </td>
             </tr>
           ))}
@@ -28,4 +28,15 @@ export const TransactionHistory = data => {
       </table>
     </>
   );
+};
+
+TransactionHistory.propTypes = {
+  items: PropTypes.arrayOf(
+    PropTypes.exact({
+      currency: PropTypes.string.isRequired,
+      amount: PropTypes.string.isRequired,
+      type: PropTypes.string.isRequired,
+      id: PropTypes.string.isRequired
+    })
+  ),
 };

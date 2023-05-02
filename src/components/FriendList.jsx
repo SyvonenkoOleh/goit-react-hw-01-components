@@ -1,7 +1,7 @@
+import PropTypes from 'prop-types';
 import FriendListModule from '../components/FriendList.module.css';
 
-export const FriendList = data => {
-  const { friends } = data;
+export const FriendList = ({ friends }) => {
 
   return (
     <>
@@ -29,4 +29,8 @@ export const FriendList = data => {
       </ul>
     </>
   );
+};
+
+FriendList.propTypes = {
+  friends: PropTypes.array.isRequired,
 };
